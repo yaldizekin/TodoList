@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TodoApp.Models.Todo>
+
+<div class="app-content content todo-application">
+    @* <div class="header" align="center" style="border-style:solid; border-color:lightgrey"><h1>My Todos</h1></div>*@
+    <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end" role="group" aria-label="Basic example">
+        <a asp-action="Month" asp-controller="Home" type="button" class="btn btn-primary active">Monthly Todos</a>
+        <a asp-action="Today" asp-controller="Home" type="button" class="btn btn-outline-primary">Daily Todos</a>
+        <a asp-action="Week" asp-controller="Home" type="button" class="btn btn-outline-primary">Weekly Todos</a>
+        <a asp-action="Index" asp-controller="Home" type="button" class="btn btn-outline-primary">All Todos</a>
+
+    </div>
+    <br />
+
+
+
+    <div class=" container">
+
+        <div class="row" align="center">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            @if (item.IsActive == true)
+                            {
+                                <p style="color:cornflowerblue">
+                                    Pending
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
+                                        <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z" />
+                                        <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z" />
+                                        <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5" />
+                                    </svg>
+                                </p>
+                            }
+                            else
+                            {
+                                <p style="color:cornflowerblue">
+                                    Completed
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
+                                    </svg>
+                                </p>
+
+                            }
+                            <h3 style="font:bolder" class="title">@item.Title</h3>
+                            <h5 class="card-text">@item.Summary</h5>
+                            <p> @Html.Raw(item.Description)</p>
+                            <div class="card-footer ">@item.DueDate.ToString("dd-MM-yyyy HH:mm")</div>
+                            <a asp-action="EditTodo" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                            <a href="#" data-id="@item.Id" class="btn delete">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <p>
+                <a asp-action="AddTodo" asp-controller="Home" class="btn btn-primary">Add New</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+@section Scripts {
+
+    <script>
+        $('.delete').click(function (e) {
+            e.preventDefault();
+
+            const that = $(this);
+
+            if (that.hasClass('ajaxOn')) {
+                return;
+            }
+
+            that.addClass('ajaxOn');
+            if (confirm('Are you sure you want to delete?')) {
+
+                $.get('deletetodo/' + that.data('id'), function (r) {
+                    that.parent().parent().parent().remove();
+                });
+            }
+        });
+    </script>
+
+    }
+

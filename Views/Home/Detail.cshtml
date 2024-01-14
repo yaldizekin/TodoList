@@ -1,0 +1,24 @@
+﻿@model TodoApp.Models.Todo
+
+
+<div class="app-content content todo-application">
+    <div class="header" align="center" style="border-style:solid; border-color:lightgrey"><h1>@Model.Title</h1></div>
+    <br />
+    <div class="card text-center">
+        
+        <div class="card-body">
+            <h5 class="card-title">@Model.Summary</h5>
+            <p class="card-text">@Model.Description</p>
+            <div align="center">
+
+        <a asp-action="EditTodo" asp-controller="Home" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    </div>
+        </div>
+        <div class="card-footer text-body-secondary">
+            @Model.DueDate
+        </div>
+    </div>
+
+
+   
+</div>

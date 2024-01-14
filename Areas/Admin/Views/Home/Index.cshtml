@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TodoApp.Models.AppUser>
+
+    <br />
+    <br />
+    <br />
+     <div class="container col-md-8" style="align-items:center">
+                       
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <h2 classs="text-primary"> Kullanıcı Listesi</h2>
+    </div>
+
+ @*   <div class="col-md-6">
+        <p>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary form-control"><i class="bi bi-person-circle"></i>Kullanıcı ekle</a>
+        </p>
+    </div>*@
+
+</div>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id.ToString()">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+
+    }

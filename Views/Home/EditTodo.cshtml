@@ -1,0 +1,87 @@
+﻿@model TodoApp.Models.Todo
+
+<div class="app-content content todo-application">
+    <div class="header" align="center" style="border-style:solid; border-color:lightgrey"><h1>Edit Todo</h1></div>
+    <br />
+
+    <div class=" container col-md-10">
+        <form asp-action="EditTodo">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <input type="hidden" asp-for="Id" />
+            <div class="row row-cards">
+
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="Summary" class="control-label"></label>
+                        <input asp-for="Summary" class="form-control" />
+                        <span asp-validation-for="Summary" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="mb-3">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control tiny" rows="5"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+                     </div>
+                 </div>
+
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="DueDate" class="control-label"></label>
+                        <input asp-for="DueDate" class="form-control" />
+                        <span asp-validation-for="DueDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div align="center">
+     
+        <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Back to HomePage</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/5-stable/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '.tiny',
+            height: 500,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        });
+
+    </script>
+}

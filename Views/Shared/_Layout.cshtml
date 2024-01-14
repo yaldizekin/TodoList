@@ -1,0 +1,123 @@
+﻿
+
+<!DOCTYPE html>
+<html class="bordered-layout loaded" lang="en" data-layout="bordered-layout" data-textdirection="ltr" style="--vh:3.88px;">
+<!-- BEGIN: Head-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
+
+    <title>My Todos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+    
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/themes/bordered-layout.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.css">
+
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+<!-- BEGIN: Bodyelif-->
+
+<body class="pace-done vertical-layout vertical-menu-modern content-left-sidebar navbar-floating footer-static menu-expanded" data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar" style="">
+    <div class="pace pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+
+    <!-- BEGIN: Header-->
+
+    <!-- END: Header-->
+    <!-- BEGIN: Main Menu-->
+
+    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow expanded " data-scroll-to-active="true" style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+        <div class="navbar-header expanded">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item me-auto">
+                    <a class="navbar-brand" href="/">
+                        <h2>Todo List</h2>
+                    </a>
+                </li>
+                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x d-block d-xl-none text-primary toggle-icon font-medium-4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-disc d-none d-xl-block collapse-toggle-icon primary font-medium-4"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg></a></li>
+            </ul>
+        </div>
+        <div class="shadow-bottom"></div>
+        <div class="main-menu-content ps ps--active-y">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+             
+                <partial name="_LoginPartial" />
+          
+                @if (User.IsInRole(Other.Role_Admin))
+                {
+                    <li class="nav-item has-sub">
+                        <a class="d-flex align-items-center" href="/Admin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-heart" viewBox="0 0 16 16">
+                                <path d="M9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4Zm13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276Z" />
+                            </svg><span class="menu-title text-truncate"></span>Admin<span class="badge badge-light-warning rounded-pill ms-auto me-1"></span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="nav-link">Admin Panel</a>
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+
+                }
+                
+                
+            </ul>
+           </div>
+    </div>
+   
+    
+    @RenderBody()
+
+ 
+    <script src="/app-assets/vendors/js/vendors.min.js"></script>
+
+    <script src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="/app-assets/js/core/app-menu.js"></script>
+    <script src="/app-assets/js/core/app.js"></script>
+  
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" defer></script>
+
+    <!-- END: Page JS-->
+
+    <script>
+        $(window).on('load', function () {
+            if (feather) {
+                feather.replace({
+                    width: 14,
+                    height: 14
+                });
+            }
+        })</script>
+        
+        @RenderSection("Script",false)
+        @RenderSection("Scripts",false)
+
+ 
+
+</body><!-- END: Body-->
+
+</html>
